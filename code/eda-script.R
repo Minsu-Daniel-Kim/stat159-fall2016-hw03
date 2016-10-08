@@ -19,27 +19,24 @@ summary(select(data, TV, Sales))
 sink()
 
 
-
-save_pdf = function(file, title) {
-  pdf(paste0("images/", title))
-  print(file)
-  dev.off()
-}
-
-save_png = function(file, title) {
-  png(paste0("images/", title))
-  print(file)
-  dev.off()  
-}
-
 # Histograms & Scatterplot
 ## Histogram of TV
-hist_tv = ggplot(data, aes(x = TV)) + geom_histogram(binwidth = 10) + ggtitle("Histogram of TV") + xlab("Budgets on TV, in thousands of dollars")
-save_pdf(hist_tv, "histogram-tv.pdf")
-save_png(hist_tv, "histogram-tv.png")
+pdf("images/histogram-tv.pdf")
+ggplot(data, aes(x = TV)) + geom_histogram(binwidth = 10) + ggtitle("Histogram of TV") + xlab("Budgets on TV, in thousands of dollars")
+dev.off()
+
+png("images/histogram-tv.png")
+ggplot(data, aes(x = TV)) + geom_histogram(binwidth = 10) + ggtitle("Histogram of TV") + xlab("Budgets on TV, in thousands of dollars")
+dev.off()
 
 ## Histogram of Sales
-hist_sales = ggplot(data, aes(x = Sales)) + geom_histogram(binwidth = 2) + ggtitle("Histogram of Sales") + xlab("Sales, in thousands of units")
-save_pdf(hist_sales, "histogram-sales.pdf")
-save_png(hist_sales, "histogram-sales.png")
+png("images/histogram-sales.png")
+ggplot(data, aes(x = Sales)) + geom_histogram(binwidth = 2) + ggtitle("Histogram of Sales") + xlab("Sales, in thousands of units")
+dev.off()
+
+pdf("images/histogram-sales.pdf")
+ggplot(data, aes(x = Sales)) + geom_histogram(binwidth = 2) + ggtitle("Histogram of Sales") + xlab("Sales, in thousands of units")
+dev.off()
+
+
 

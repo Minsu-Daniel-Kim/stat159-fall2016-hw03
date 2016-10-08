@@ -1,8 +1,7 @@
 ## STAT159 HW02
 
 ### Objective 
-This project provides an opportunity to practice with the computational tools covered so far in the
-course: bash, markdown, pandoc, git, github, Make, and a text editor. Also, this project outputs a paper that explains about basic tools for reproducible workflow
+In this analysis, I explore the statistical relationship between advertising budget and its effectiveness. In particular, I focus on the linear relationship between the increase in the budgets spending on TV advertisement and the increase in the number of items sold by reproducing the results from the book An Introduction to Statistical Learning.
 
 ### How to generate report.pdf
 You can easily find a Makefile in stat159-fall2016-hw02 directory. 

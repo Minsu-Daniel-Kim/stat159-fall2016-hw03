@@ -27,7 +27,7 @@ library(grid)
 data = read.csv("../data/Advertising.csv")
 data.rdata = load("../data/regression.RData")
 
-print(xtable(summary(select(data, -V1)), caption = 'Advertising data set'), comment = FALSE, caption.placement = 'top')
+print(xtable(summary(data), caption = 'Advertising data set'), comment = FALSE, caption.placement = 'top')
 
 ```
 
@@ -35,8 +35,8 @@ Table 1 shows the summary of the data set. The budget spending on TV is the high
 
 # Methodology
 
-In order to investigate the linear relationship between TV and Sales, I use a simple linear regression. It is a very straightforward approach and commonly used model for predicting a quantitative response Y on the basis of a single predictor variable X. It assumes that there is approximately a linear relationship between preditor and target variable. Mathematically, we can write this linear relationship as Y = b0 + b1X
-In the context of this analysis, X represents TV advertising and Y represents sales. By fitting the model, I can regress sales onto TV, 
+In order to investigate the linear relationship between TV and Sales, I use a simple linear regression. It is a very straightforward approach and commonly used model for predicting a quantitative response Y on the basis of a single predictor variable X. It assumes that there is approximately a linear relationship between preditor and target variable. Mathematically, we can write this linear relationship as $$Sales = \beta_{0} + \beta_{1} TV$$
+In the context of this analysis, X represents TV advertising and Y represents sales. By fitting the model, I can regress sales onto TV.
 
 Before fitting the model, I first look at the general distributions of both TV and Sales. 
 
