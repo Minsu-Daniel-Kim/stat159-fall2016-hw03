@@ -4,7 +4,7 @@ data = read.csv("data/Advertising.csv")
 
 # linear model fitting
 model.lm = lm(Sales ~ TV, data = data)
-
+saver
 # save model
 save(model.lm, file = "data/regression.RData")
 
