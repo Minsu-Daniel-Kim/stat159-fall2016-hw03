@@ -1,18 +1,31 @@
-.PHONY: all data clean
+# variables
+CODE = code
+DATA = data
+SCRIPT = code/scripts
+REPORT = report
 
-all: report/report.pdf data/eda-output.txt data/regression.RData
+# Declare PHONY targets
+.PHONY: all data tests eda regression report clean
+
+all: eda regression report
 
 data: 
-	curl -0 http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv > data/Advertising.csv
+	curl -o $(DATA)/Advertising.csv "http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv"
 
-data/regression.RData: code/regression-script.R data/Advertising.csv
-	Rscript code/regression-script.R
+eda: $(SCRIPT)/eda-script.R session
+	Rscript $(SCRIPT)/eda-script.R
 
-data/eda-output.txt: code/eda-script.R data/Advertising.csv
-	Rscript code/eda-script.R
+regression: $(SCRIPT)/regression-script.R
+	Rscript $(SCRIPT)/regression-script.R
 
-report/report.pdf: report/report.Rmd data/regression.RData images/scatterplot-tv-sales.png
-	pandoc -s report/report.Rmd -o report/report.pdf
+session: $(SCRIPT)/session-info-script.R
+	Rscript $(SCRIPT)/session-info-script.R	
+
+tests: $(CODE)/test-that.R 
+	Rscript $(CODE)/test-that.R
+
+report: $(REPORT)/report.Rmd
+	cd $(REPORT); Rscript -e 'library(rmarkdown); render("report.Rmd")'
 
 clean: 
-	rm -f report/report.pdf
+	rm -f $(REPORT)/report.pdf

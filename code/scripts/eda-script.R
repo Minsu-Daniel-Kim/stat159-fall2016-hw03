@@ -1,10 +1,5 @@
-
-# Download file from the website
-file = fread('http://www-bcf.usc.edu/~gareth/ISL/Advertising.csv')
-
-# export in csv format
-write.csv(file, "data/Advertising.csv", row.names = FALSE)
-
+library(dplyr)
+library(ggplot2)
 # read from Advertising.csv
 data = read.csv("data/Advertising.csv")
 

@@ -2,6 +2,7 @@
 # read from Advertising.csv
 advertising = read.csv("data/Advertising.csv")
 advertising.model = lm(Sales ~ . -V1, data = advertising)
+advertising.model = lm(Sales ~ . -V1 -Newspaper, data = advertising)
 advertising.model.summary = summary(advertising.model)
 
 # save to regression.RData
