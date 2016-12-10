@@ -1,5 +1,7 @@
 ## STAT159 HW03
 
+Multiple regression analysis
+
 ### Objective 
 In this analysis, I explore the statistical relationship between advertising budget and its effectiveness. In particular, I focus on the linear relationship between the increase in three predictors, namely, TV, radio and newspapers and the increase in the number of items sold by reproducing the results from the book, An Introduction to Statistical Learning. To analyze the effect of these indicators, I fit a multiple linear regression on data.
 

@@ -6,4 +6,5 @@ for (i in 1:length(files)) {
 }
 
 # run unit tests in folder 'tests/'
-test_dir("tests", reporter = "Summary")
+# test_dir("tests", reporter = "Summary")
+test_file("code/tests/test-info-script.R")

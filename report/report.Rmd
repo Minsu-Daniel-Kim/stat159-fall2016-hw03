@@ -49,7 +49,7 @@ Here are statistics about the simple linear regressions on TV, radio and newspap
 
 ```{r, results='asis', echo=FALSE, message=FALSE}
 advertising = read.csv("../data/Advertising.csv", header = TRUE)
-lm <- lm(Sales ~ TV, data = advertising)
+lm <- lm(sales ~ TV, data = advertising)
 lm.summary <- summary(lm)
 print(xtable(lm.summary$coefficient, caption = 'Linear Regression on TV vs Sales'), comment = FALSE, caption.placement = 'top')
 cat("\n")
@@ -61,7 +61,7 @@ Table 1 shows the linear regression on TV vs Sales. The estimated slope is 0.05 
 
 ```{r, results='asis', echo=FALSE, message=FALSE}
 
-lm <- lm(Sales ~ Radio, data = advertising)
+lm <- lm(sales ~ radio, data = advertising)
 lm.summary <- summary(lm)
 print(xtable(lm.summary$coefficient, caption = 'Linear Regression on Radio vs Sales'), comment = FALSE, caption.placement = 'top')
 cat("\n")
@@ -72,7 +72,7 @@ Table 2 shows the linear regression on radio vs Sales. The estimated slope is 0.
 #### Simple Linear Regression on Newspaper and Sales
 
 ```{r, results='asis', echo=FALSE, message=FALSE}
-lm <- lm(Sales ~ Newspaper, data = advertising)
+lm <- lm(sales ~ newspaper, data = advertising)
 lm.summary <- summary(lm)
 print(xtable(lm.summary$coefficient, caption = 'Linear Regression on Newspaper vs Sales'), comment = FALSE, caption.placement = 'top')
 cat("\n")

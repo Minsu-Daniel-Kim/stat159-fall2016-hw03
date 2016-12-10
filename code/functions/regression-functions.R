@@ -1,49 +1,66 @@
 
-# import data
-advertising = read.csv("../data/Advertising.csv")
-advertising.model = lm(Sales ~ . -V1, data = advertising)
-advertising.model.summary = summary(advertising.model)
-
-
 # Residual Sum of Squares. It calculates the residual sum of squares
 # It takes "lm" object as input, and the output is the residual sum of squares.
 residual_sum_squares <- function(lm) {
   
-  return(sum(lm$residuals ** 2))
+  
+  
+  RSS <- sum((lm$model$sales - lm$fitted.values) ** 2)
+  
+  return(RSS)
   
 }
 # Total Sum of Squares. It calculates the total sum of squares.
 # It takes the "lm" object as input, and it returns the TSS.
 total_sum_squares <- function(lm) {
   
-  return(sum( (lm$fitted.values - mean(lm$fitted.values)) ^ 2))
+  # RSS <- residual_sum_squares(lm)
+  # TSS <- (RSS / (1 - summary(lm)$r.squared))
+  
+  mean_value <- mean(lm$model$sales)
+  TSS <- sum((lm$model$sales - mean_value) ** 2)
+  
+  return(TSS)
   
 }
 # R-squared. It calculates the coefficient of determination
 # It takes the "lm" object as input, and it returns the R^2
 r_squared <- function(lm) {
   
-  lm.summary = summary(lm)
-  return(lm.summary$r.squared)
+  
+  RSS <- residual_sum_squares(lm)
+  TSS <- total_sum_squares(lm)
+  return(1 - (RSS / TSS))
 }
 
 # F-statistic. It calculates $F$-statistic. 
 # It takes the "lm" object as input, and it returns the F-statistic.
 f_statistic <- function(lm) {
   
-  lm.summary = summary(lm)
-  return(lm.summary$fstatistic[1])
+  RSS <- residual_sum_squares(lm)
+  TSS <- total_sum_squares(lm)
+
+  n <- nrow(lm$model)
+  p <- ncol(lm$model) - 1
+  
+  f_statistic <- ((TSS - RSS) / p) / (RSS / (n - p - 1))
+  return(f_statistic)
   
 }
+
 
 # Residual Standard Error. It calculates the residual standard error. 
 # It takes the "lm" object as input, and it returns the RSE.
 
 residual_std_error <- function(lm) {
   
-  lm.summary = summary(lm)
+  RSS <- residual_sum_squares(lm)
   
-  return( lm.summary$sigma )
+  n <- nrow(lm$model)
+  p <- ncol(lm$model) - 1
+  
+  RSE <- sqrt( (1 / (n - p - 1)) * RSS )
+  return(RSE)
 }
 
 # It generates a table 3.4 in Introduction to statistical learning
@@ -64,8 +81,8 @@ get_table_three_four <- function(lm){
 
 get_table_three_five <- function(lm) {
   
-  df = select(advertising, TV, Radio, Newspaper, Sales)
-  colnames(df) = c("TV", "radio", "newspaper", "sales")
+  df = select(advertising, TV, radio, newspaper, sales)
+  # colnames(df) = c("TV", "radio", "newspaper", "sales")
   matrix_corr = round(cor(df), 4)
   lower_tri = lower.tri(matrix_corr)
   matrix_corr[lower_tri] <- NA
